@@ -43,16 +43,16 @@ class Ball(GameSprite):
         self.speed_x = self.speed
         self.speed_y =  self.speed
     def update(self):
-        if ball.rect.y < 0:
+        if self.rect.y < 0 or self.rect.y > 450:
             speed_y *= -1
-        if ball.rect.x > 650 or ball.rect.x <0:
+        if self.rect.x > 650 or self.rect.x <0:
             speed_x *= -1
-        if ball.colliderect(platform.rect):
+        if self.colliderect(platform.rect):
             speed_y *= -1
-        ball.rect.x += speed_x
-        ball.rect.y += speed_y
+        self.rect.x += speed_x
+        self.rect.y += speed_y
         
-Ball = Ball('Ball.png')
+ball = Ball('Ball.png',200, 200, 80, 100, 10)
 racket1 = Player("Raketka.png", 600, 200, 80, 100, 10)
 racket2 = Player("Raketka2.png", 20, 200, 80, 100, 10)
 game = True
@@ -61,8 +61,8 @@ finish = False
 while game:
     if finish != True:
         window.blit(background,(0, 0))
-        Ball.update()
-        Ball.draw(window)
+        ball.update()
+        ball.draw(window)
         racket1.update_l()
         racket1.reset()
         racket2.update_r()
